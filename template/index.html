@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    {{{style}}}
+    <script src="remark-latest.min.js"></script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="terminal.language.js"></script>
+    <script>
+      function create() {
+        var slideshow = remark.create(
+          {
+            {{{source}}},
+            //ratio: '16:9',
+            ratio: '4:3',
+            navigation: {scroll: false},
+            highlightStyle: 'monokai',
+            highlightLines: true
+          },
+          function() {
+            // extract the embedded styling from ansi spans
+            var highlighted = document.querySelectorAll("code.terminal span.hljs-ansi");
+            Array.prototype.forEach.call(highlighted, function(next) {
+              next.insertAdjacentHTML("beforebegin", next.textContent);
+              next.parentNode.removeChild(next);
+            });
+          }
+        );
+      }
+    </script>
+  </head>
+  <body onload="slideshow = create()">
+  </body>
+</html>
