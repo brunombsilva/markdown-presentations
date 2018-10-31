@@ -8,10 +8,20 @@ Presentation(s) written using
 
 ## How to present
 
-```
+```bash
 git clone
-npm install -g backslide
+
+# Install backslide & decktape
+npm install -g backslide decktape
+
+# Build template javascript with dependencies
+cd template && npm install && npm run build
+
+# Serve presentations
 bs serve
+
+# Get PDF
+decktape remark http://localhost:4100/git-advanced-topics.html git-advanced-topics.pdf
 ```
 
 ## How to write content
@@ -20,4 +30,4 @@ bs serve
 
 * [Coloured Terminal Listings
 in remark](http://joshbode.github.io/remark/ansi.html#1)
-* [https://github.com/theZiz/aha](https://github.com/theZiz/aha)
+* http://nomnoml.com

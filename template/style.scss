@@ -1,9 +1,10 @@
 @import "https://fonts.googleapis.com/css?family=Droid+Serif";
 @import "https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz";
 @import "https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic";
+@import "https://fonts.googleapis.com/css?family=Abel";
 
 body {
-  font-family: "Droid Serif";
+  font-family: "Abel";
 }
 h1,
 h2,
@@ -12,11 +13,15 @@ h3 {
   font-weight: 400;
   margin-bottom: 0;
 }
+
+.remark-slide-content {
+  font-size: 26px;
+}
 .remark-slide-content h1 {
-  font-size: 3em;
+  font-size: 2.5em;
 }
 .remark-slide-content h2 {
-  font-size: 2em;
+  font-size: 1.9em;
 }
 .remark-slide-content h3 {
   font-size: 1.6em;
@@ -39,7 +44,7 @@ a > code {
   color: rgb(249, 38, 114);
   text-decoration: none;
 }
-code {
+code.remark-code {
   background: #e7e8e2;
   border-radius: 5px;
 }
@@ -70,7 +75,8 @@ code {
 }
 .inverse {
   background: #272822;
-  color: #777872;
+  //color: #777872;
+  color: #bbb;
   text-shadow: 0 0 20px #333;
 }
 .inverse h1,
@@ -130,4 +136,106 @@ code {
   width: 75%;
   float: right;
   padding-top: 1em;
+}
+
+// Customizations
+
+.remark-container {
+  background: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+img[alt="Github Commits"] {
+  height: 500px;
+}
+
+.hljs-dquote {
+  color: #888;
+}
+
+.hljs-prompt {
+  color: rgb(221, 180, 68);
+}
+
+.hljs-commit-hash {
+  color: #a6e22e;
+}
+
+.remark-code {
+  //border: solid white 1px;
+  box-shadow: -1px 0px 28px 2px rgba(255, 255, 255, 0.42);
+}
+
+.remark-code-line {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-height: 1.1em;
+
+  &:hover {
+    overflow: visible;
+  }
+}
+
+.remark-container:-webkit-full-screen .remark-slide-scaler {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+li {
+  line-height: 1.7em;
+}
+
+.remark-slide-content {
+  p,
+  ul {
+    font-size: 1em;
+  }
+}
+svg.nomnoml {
+  width: 100%;
+  height: 100%;
+  text-shadow: none;
+}
+
+.hljs-monokai {
+  .hljs-deletion {
+    color: #f00;
+  }
+
+  .hljs-meta {
+    color: #007bff;
+  }
+}
+
+.remark-inline-code {
+  color: #a6e22e;
+}
+
+blockquote {
+  font-style: italic;
+  position: relative;
+
+  &:before,
+  &:after {
+    position: absolute;
+    color: #f1efe6;
+    font-size: 8rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &:before {
+    content: "“";
+    left: -5rem;
+    top: -2rem;
+  }
+
+  &:after {
+    content: "”";
+    right: -2rem;
+    bottom: 1rem;
+  }
 }

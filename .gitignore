@@ -1,2 +1,6 @@
 .tmp
-
+template/node_modules
+template/bundle.js
+template/.cache
+pdf
+dist
