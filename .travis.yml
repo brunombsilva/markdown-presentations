@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "10"
+env:
+  - BASE_URL=https://github.com/$TRAVIS_REPO_SLUG/blob/$TRAVIS_BRANCH/
+install:
+  - npm install -g backslide
+script:
+  # Replace relative links, not relative images
+  - sed -i -r "s#([^\!]\[.*\]\()\./#\1$BASE_URL#" *.md
+  - bs pdf
+  - rm pdf/README.pdf
+
+deploy:
+  provider: releases
+  name: "Latest"
+  prerelease: true
+  draft: true
+  api_key: "$GITHUB_TOKEN"
+  file_glob: true
+  file: "pdf/*.pdf"
+  skip_cleanup: true
+  on:
+    tags: true

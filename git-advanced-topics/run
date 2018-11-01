@@ -1,0 +1,61 @@
+#!/bin/bash
+
+DIR=$(stat -f `dirname $0`)
+
+export LESS="-R -F -X"
+
+function pause() {
+    printf "\e[90m%s\n" "$@"
+    read -n 1 -s
+}
+
+export -f pause
+
+#export GIT_SEQUENCE_EDITOR="$DIR/rebase-i.sh"
+
+cat <<EOT > compiled.sh
+# Initializing
+rm -fR /tmp/repo
+mkdir -p /tmp/repo
+cd /tmp/repo
+git init
+EOT
+
+function print_prompt() {
+    echo "printf '\n\e[34m❯\e[92m %s\e[39m\n' '$(echo $@ | sed "s/'/''/g")'" >> compiled.sh
+}
+
+captured=()
+while read line ; do
+    case $line in
+    ""|\#*|pause*)
+        echo "$line" >> compiled.sh
+        ;;
+    "cat <<EOT"*)
+        print_prompt $line
+        captured+=("$line")
+        ;;
+    EOT)
+        captured+=("$line")
+        for l in "${captured[@]:1}"; do
+            echo "printf '\e[92m%s\e[39\n' '$l'" >> compiled.sh
+        done
+        for l in "${captured[@]}"; do
+            echo "$l" >> compiled.sh
+        done
+        captured=()
+        ;;
+    *)
+        if [[ -z "$captured" ]]; then
+            print_prompt $line
+            echo "$line" >> compiled.sh
+        else
+            captured+=("$line")
+        fi
+        ;;
+    esac
+done < $DIR/$1*
+
+chmod +x compiled.sh
+./compiled.sh
+rm compiled.sh
