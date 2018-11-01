@@ -19,17 +19,14 @@ Presentation(s) written using
 ```bash
 git clone
 
-# Install backslide & decktape
-npm install -g backslide decktape
-
-# Build template javascript with dependencies
-cd template && npm install && npm run build
+# Install backslide
+npm install -g backslide
 
 # Serve presentations
 bs serve
 
 # Get PDF
-decktape remark http://localhost:4100/git-advanced-topics.html git-advanced-topics.pdf
+bs pdf
 ```
 
 ## How to write content
